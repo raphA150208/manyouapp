@@ -26,8 +26,8 @@
     <%= form.date_field :due_date %>
   </div>
 
-    <%= form.label :ステータス %>
   <div class="field_status">
+    <%= form.label :ステータス %>
     <%= form.select :status, Task.statuses.keys.to_a, {} %>
   </div>
 
