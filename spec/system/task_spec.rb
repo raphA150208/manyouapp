@@ -72,7 +72,11 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タイトルのあいまい検索とステータス検索をした場合' do
       it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
-        # ここに実装する
+        fill_in 'search_title', with: 'task'
+        select '未着手', from: 'search_status'
+        click_on '検索'
+        expect(page).to have_content 'task'
+        expect(page).to have_content '未着手'
       end
     end
   end
