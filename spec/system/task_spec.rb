@@ -65,8 +65,9 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'ステータス検索をした場合' do
       it "ステータスに完全一致するタスクが絞り込まれる" do
-        # ここに実装する
-        # プルダウンを選択する「select」について調べてみること
+        select '未着手', from: 'search_status'
+        click_on '検索'
+        expect(page).to have_content '未着手'
       end
     end
     context 'タイトルのあいまい検索とステータス検索をした場合' do
