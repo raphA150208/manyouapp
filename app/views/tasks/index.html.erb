@@ -6,10 +6,13 @@
 <%= link_to '終了期限', tasks_path(sort_expired: "true") %>
 
 <div>
-  <h3>タイトル検索</h3>
-  <%= form_with url: tasks_path, method: :get, local: true do |form| %>
-    <%= form.text_field :search %>
-    <%= form.submit 'search', name: nil %>
+  <h3>検索</h3>
+  <%= form_with model: @task, method: :get, local: true do |form| %>
+    <%= form.label :'タイトル' %>
+    <%= form.text_field :search_title %>
+    <%= form.label :'ステータス' %>
+    <%= form.select :search_status, Task.statuses.keys %>
+    <%= form.submit '検索', name: 'search' %>
     <%= link_to '検索終了', tasks_path %>
   <% end %>
 </div>
