@@ -12,13 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :title %>
+    <%= form.label :タスク %>
     <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    <%= form.label :content %>
+    <%= form.label :内容 %>
     <%= form.text_field :content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :終了期限 %>
+    <%= form.datetime_select :due_date %>
   </div>
 
   <div class="actions">
