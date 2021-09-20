@@ -8,7 +8,7 @@
 |title|string|
 |content|string|
 |priority|integer|
-|deadline|datetime|
+|due_date|datetime|
 |status|integer|
 |user_id|bigint|
 

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
+<h1>タスク一覧</h1>
 
 <table>
   <thead>
@@ -28,4 +28,5 @@
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>
+<%= link_to 'タスク作成', new_task_path %>
+<%= link_to '終了期限', tasks_path(sort_expired: "true") %>
