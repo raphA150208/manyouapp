@@ -17,6 +17,7 @@
     <%= link_to '検索終了', tasks_path %>
   <% end %>
 </div>
+
 <table>
   <thead>
     <tr>
@@ -44,7 +45,9 @@
     <% end %>
   </tbody>
 </table>
-
+<div class="page_next">
+  <%= paginate @tasks %>
+</div>
 <br>
 
 
