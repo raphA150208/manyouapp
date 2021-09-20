@@ -17,7 +17,12 @@
     <%= link_to '検索終了', tasks_path %>
   <% end %>
 </div>
-
+<span class="label label-default">Default</span>
+<span class="label label-primary">Primary</span>
+<span class="label label-success">Success</span>
+<span class="label label-info">Info</span>
+<span class="label label-warning">Warning</span>
+<span class="label label-danger">Danger</span>
 <table>
   <thead>
     <tr>
@@ -38,9 +43,9 @@
         <td class="task_row"><%= task.due_date %></td>
         <td class="task_row"><%= task.status %></td>
         <td class="task_row"><%= task.priority %></td>
-        <td><%= link_to '詳細', task %></td>
-        <td><%= link_to '編集', edit_task_path(task) %></td>
-        <td><%= link_to '削除', task, method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+        <td><%= link_to '詳細', task, class:"btn btn-outline-success" %></td>
+        <td><%= link_to '編集', edit_task_path(task), class:"btn btn-outline-info" %></td>
+        <td><%= link_to '削除', task, class:"btn btn-outline-warning", method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
       </tr>
     <% end %>
   </tbody>
