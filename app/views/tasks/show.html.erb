@@ -1,14 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to '編集', edit_task_path(@task) %> |
+<%= link_to 'タスク一覧', tasks_path %>
+
 <p>
-  <strong>Title:</strong>
+  <strong>タスク:</strong>
   <%= @task.title %>
 </p>
 
 <p>
-  <strong>Content:</strong>
+  <strong>内容:</strong>
   <%= @task.content %>
 </p>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<p>
+  <strong>終了期限:</strong>
+  <%= @task.due_date %>
+</p>
+
+<p>
+  <strong>ステータス:</strong>
+  <%= @task.status %>
+</p>
+
+
