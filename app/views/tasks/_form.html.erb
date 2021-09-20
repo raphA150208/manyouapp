@@ -23,11 +23,11 @@
 
   <div class="field">
     <%= form.label :終了期限 %>
-    <%= form.datetime_select :due_date %>
+    <%= form.date_field :due_date %>
   </div>
 
-  <div class="field">
     <%= form.label :ステータス %>
+  <div class="field_status">
     <%= form.select :status, Task.statuses.keys.to_a, {} %>
   </div>
 
