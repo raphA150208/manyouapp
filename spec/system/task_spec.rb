@@ -42,6 +42,14 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[0]).to have_content 'long_deadline'
       end
     end
+    context '並べ替え（優先順位）を押した場合' do
+      it '優先順位が高い順にタスク一覧が表示される' do
+        task = FactoryBot.create(:task, title: 'priority_high', priority:'高')
+        visit tasks_path
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content 'priority_high'
+      end
+    end
   end
   describe '詳細表示機能' do
     context '任意のタスク詳細画面に遷移した場合' do
