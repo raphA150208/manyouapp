@@ -4,7 +4,7 @@
 <%= link_to 'タスク一覧', tasks_path %>
 
 <p>
-  <strong>タイトル:</strong>
+  <strong>タスク名:</strong>
   <%= @task.title %>
 </p>
 
@@ -23,4 +23,13 @@
   <%= @task.status %>
 </p>
 
-
+<p>
+  <strong>作成者：</strong>
+  <%= @task.user.name %>
+</p>
+<div class="user_only_link">
+  <% if @task.user == current_user %>
+    <%= link_to '編集', edit_task_path(@task.id) %>
+    <%= link_to '削除', task_path(@task.id), method: :delete, data: { confirm: '本当に削除しますか?' } %>
+  <% end %>
+</div>

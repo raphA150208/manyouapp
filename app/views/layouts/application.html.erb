@@ -5,11 +5,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
 
   <body>
     <%= yield %>
+    <br>
+    <% if logged_in? %>
+      <%= link_to "ユーザー情報", user_path(current_user.id), class:"btn btn-outline-primary" %>
+      <%= link_to "ログアウト", session_path(current_user.id), method: :delete, class:"btn btn-outline-primary" %>
+      <%= link_to "タスク一覧", tasks_path, class:"btn btn-outline-primary" %>
+      <%= link_to 'タスク作成', new_task_path, class:"btn btn-outline-primary" %>
+      <% if current_user.admin? %>
+        <li class="active"><%= link_to "管理者専用一覧", admin_users_path %></li>
+      <% end %>
+    <% else %>
+      <%= link_to "アカウント作成", new_user_path %>
+  <% end %>
   </body>
 </html>

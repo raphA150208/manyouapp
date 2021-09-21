@@ -1,4 +1,4 @@
-<%= form_with(model: task, local: true) do |form| %>
+<%= form_with(model: @task, local: true, url: choose_new_or_edit) do |form| %>
   <% if task.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
@@ -30,13 +30,13 @@
     <%= form.label :ステータス %>
     <%= form.select :status, Task.statuses.keys.to_a, {} %>
   </div>
-
+<br>
   <div class="field_priority">
     <%= form.label :優先順位 %>
     <%= form.select :priority, Task.priorities.keys.to_a, {} %>
   </div>
-
+<br>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit '作成' %>
   </div>
 <% end %>

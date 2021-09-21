@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<div class="main user-show">
+  <div class="container">
+    <div class="user">
+      <h3><%= @user.name %>のページ</h3>
+      <p>メールアドレス: <%= @user.email %></p>
+      <p>管理者権限：<%= @user.admin == true ? 'あり' : 'なし' %></p>
+    </div>
+
+    <div class="choice">
+      <% if @user.id==@current_user.id %>
+        <%= link_to "編集", edit_user_path(@user), class:"btn btn-outline-warning" %>
+        <%= link_to '削除', user_path(@user), method: :delete, data: { confirm: '本当に削除しますか?' }, class:"btn btn-outline-warning" %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<br>

@@ -15,8 +15,8 @@ RSpec.describe 'タスク管理機能', type: :system do
       find('.field_status').set(1)
       click_button '登録する'
       expect(page).to have_content 'test_title'
-      expect(page).to have_content "test_content"
-      expect(page).to have_content "未着手"
+      expect(page).to have_content 'test_content'
+      expect(page).to have_content '未着手'
       end
     end
   end
