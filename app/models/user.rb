@@ -3,7 +3,8 @@ class User < ApplicationRecord
     throw :abort if self.admin? && User.where(admin: true).count == 1
   end
   def admin_exist_check_update
-    throw :abort if self.admin == false && User.where(admin: true).count == 1
+    @admin_user = User.where(admin: true)
+    throw :abort if @admin_user.first == self && @admin_user.count == 1
   end
   before_destroy :admin_exist_check
   before_update :admin_exist_check_update

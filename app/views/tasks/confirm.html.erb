@@ -4,16 +4,20 @@
     <%= form_with(model: @task, local: true) do |form| %>
       <%= form.hidden_field :title %>
       <p>タスク名:<%= @task.title %></p>
+
       <%= form.hidden_field :content %>
       <p>内容:<%= @task.content %></p>
+
       <%= form.hidden_field :due_date %>
       <p>終了期限:<%= @task.due_date %></p>
+
       <%= form.hidden_field :status %>
       <p>ステータス:<%= @task.status %></p>
+
       <%= form.hidden_field :priority %>
       <p>優先順位:<%= @task.priority %></p>
 
-      <%= form.submit '作成する' %>
+      <%= form.submit '作成' %>
       <%= form.submit '戻る', name: 'back' %>
     <% end %>
   </div>
