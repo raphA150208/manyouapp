@@ -19,8 +19,10 @@
       <%= link_to "ログアウト", session_path(current_user.id), method: :delete, class:"btn btn-outline-primary" %>
       <%= link_to "タスク一覧", tasks_path, class:"btn btn-outline-primary" %>
       <%= link_to 'タスク作成', new_task_path, class:"btn btn-outline-primary" %>
+      <br>
+      <br>
       <% if current_user.admin? %>
-        <li class="active"><%= link_to "管理者専用一覧", admin_users_path %></li>
+        <%= link_to "管理者専用一覧", admin_users_path, class:"btn btn-outline-danger" %>
       <% end %>
     <% else %>
       <%= link_to "アカウント作成", new_user_path %>

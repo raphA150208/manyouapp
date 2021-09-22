@@ -1,13 +1,15 @@
 <div class="conteiner">
-  <h2>＜管理画面＞ユーザー一覧</h2>
-  <div class="new_btn">
-      <%= link_to '新規ユーザー登録', new_admin_user_path, class:"btn btn-primary" %>
+  <h2>管理者　ユーザー一覧</h2>
+    <br>
+    <div class="new_btn">
+      <%= link_to 'ユーザー登録', new_admin_user_path, class:"btn btn-outline-primary" %>
     </div>
+    <br>
   <table class="table">
     <tr>
       <th>No.</th>
       <th>ユーザー名</th>
-      <th>email</th>
+      <th>アドレス</th>
       <th>タスク数</th>
       <th>管理者権限</th>
       <th colspan="3"></th>
