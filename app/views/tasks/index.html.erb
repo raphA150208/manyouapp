@@ -35,8 +35,8 @@
         <td class="task_row"><%= task.status %></td>
         <td class="task_row"><%= task.priority %></td>
         <td><button type="button" class="btn btn-outline-success"><%= link_to '詳細', task %></button></td>
-        <td><button type="button" class="btn btn-outline-info"><%= link_to '編集', task %></button></td>
-        <td><button type="button" class="btn btn-outline-danger"><%= link_to '削除', task %></button></td>
+        <td><button type="button" class="btn btn-outline-info"><%= link_to '編集', edit_task_path(task.id) %></button></td>
+        <td><button type="button" class="btn btn-outline-danger"><%= link_to '削除', task, method: :delete, data: { confirm: '本当に削除しますか?' } %></button></td>
       </tr>
     <% end %>
   </tbody>

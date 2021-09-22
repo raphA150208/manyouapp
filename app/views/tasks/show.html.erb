@@ -33,7 +33,7 @@
 </p>
 <div class="user_only_link">
   <% if @task.user == current_user %>
-    <%= link_to '編集', edit_task_path(@task.id) %>
-    <%= link_to '削除', task_path(@task.id), method: :delete, data: { confirm: '本当に削除しますか?' } %>
+    <%= link_to '編集', edit_task_path(@task.id), class: 'btn btn-outline-success' %>
+    <%= link_to '削除', task_path(@task.id), method: :delete, data: { confirm: '本当に削除しますか?' }, class: 'btn btn-outline-danger' %>
   <% end %>
 </div>
