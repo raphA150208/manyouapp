@@ -1,36 +1,27 @@
-<p id="notice"><%= notice %></p>
 
-<h1>タスク一覧</h1>
-<%= link_to 'タスク作成', new_task_path %>
+<h2><%= current_user.name %>のタスク一覧</h2>
 <br>
-<%= link_to '並べ替え（終了期限）', tasks_path(sort_expired: "true") %>
-<%= link_to '並べ替え（優先順位）', tasks_path(sort_priority: "true") %>
-
+<br>
 <div>
-  <h3>検索</h3>
+  <h6>検索</h6>
   <%= form_with model: @task, method: :get, local: true do |form| %>
-    <%= form.label :'タイトル' %>
+    <%= form.label :'タスク名' %>
     <%= form.text_field :search_title %>
     <%= form.label :'ステータス' %>
-    <%= form.select :search_status, Task.statuses.keys %>
+    <%= form.select :search_status, Task.statuses.keys.to_a,include_blank: true %>
     <%= form.submit '検索', name: 'search' %>
     <%= link_to '検索終了', tasks_path %>
   <% end %>
 </div>
-<span class="label label-default">Default</span>
-<span class="label label-primary">Primary</span>
-<span class="label label-success">Success</span>
-<span class="label label-info">Info</span>
-<span class="label label-warning">Warning</span>
-<span class="label label-danger">Danger</span>
+
 <table>
   <thead>
     <tr>
-      <th>タイトル</th>
+      <th>タスク名</th>
       <th>内容</th>
-      <th>終了期限</th>
+      <th><%= link_to '並べ替え（終了期限）', tasks_path(sort_expired: "true") %></th>
       <th>ステータス</th>
-      <th>優先順位</th>
+      <th><%= link_to '並べ替え（優先順位）', tasks_path(sort_priority: "true") %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -43,13 +34,14 @@
         <td class="task_row"><%= task.due_date %></td>
         <td class="task_row"><%= task.status %></td>
         <td class="task_row"><%= task.priority %></td>
-        <td><%= link_to '詳細', task, class:"btn btn-outline-success" %></td>
-        <td><%= link_to '編集', edit_task_path(task), class:"btn btn-outline-info" %></td>
-        <td><%= link_to '削除', task, class:"btn btn-outline-warning", method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+        <td><button type="button" class="btn btn-outline-success"><%= link_to '詳細', task %></button></td>
+        <td><button type="button" class="btn btn-outline-info"><%= link_to '編集', edit_task_path(task.id) %></button></td>
+        <td><button type="button" class="btn btn-outline-danger"><%= link_to '削除', task, method: :delete, data: { confirm: '本当に削除しますか?' } %></button></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+<br>
 <div class="page_next">
   <%= paginate @tasks %>
 </div>

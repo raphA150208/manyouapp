@@ -1,21 +1,21 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
+  before_action :authenticate_user, only: %i[edit update destroy]
 
-  # GET /tasks or /tasks.json
   def index
     if params[:sort_expired]
-      @tasks = Task.all.order(due_date: :desc).page(params[:page])
+      @tasks =  current_user.tasks.order(due_date: :desc).page(params[:page])
     elsif params[:sort_priority]
-      @tasks = Task.all.order(priority: :desc).page(params[:page])
+      @tasks =  current_user.tasks.order(priority: :desc).page(params[:page])
     elsif
-      @tasks = Task.all.order(created_at: :desc).page(params[:page])
+      @tasks =  current_user.tasks.order(created_at: :desc).page(params[:page])
     end
     if params[:search_title].present? && params[:search_status].present?
-      @tasks = Task.search_title(params[:search_title]).search_status(params[:search_status]).page(params[:page])
+      @tasks =  current_user.tasks.search_title(params[:search_title]).search_status(params[:search_status]).page(params[:page])
     elsif params[:search_title].present?
-      @tasks = Task.search_title(params[:search_title]).page(params[:page])
+      @tasks =  current_user.tasks.search_title(params[:search_title]).page(params[:page])
     elsif params[:search_status].present?
-      @tasks = Task.search_status(params[:search_status]).page(params[:page])
+      @tasks =  current_user.tasks.search_status(params[:search_status]).page(params[:page])
     end
   end
 
@@ -25,7 +25,11 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
-    @task = Task.new
+    if params[:back]
+      @task = Task.new(task_params)
+    else
+      @task = Task.new
+    end
   end
 
   # GET /tasks/1/edit
@@ -34,15 +38,18 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = Task.new(task_params)
-
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: "タスクを作成しました" }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+    @task = current_user.tasks.build(task_params)
+    if params[:back]
+      render :new
+    else
+      respond_to do |format|
+        if @task.save
+          format.html { redirect_to @task, notice: "タスク作成完了" }
+          format.json { render :show, status: :created, location: @task }
+        else
+          format.html { render :new, status: :unprocessable_entity }
+          format.json { render json: @task.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -51,7 +58,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: "タスクが更新されました" }
+        format.html { redirect_to @task, notice: "更新完了" }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -69,14 +76,19 @@ class TasksController < ApplicationController
     end
   end
 
+  def confirm
+    @task = current_user.tasks.build(task_params)
+    render :new if @task.invalid?
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def task_params
-      params.require(:task).permit(:task, :title, :content, :due_date, :status, :priority)
-    end
+  # Only allow a list of trusted parameters through.
+  def task_params
+    params.require(:task).permit(:task, :title, :content, :due_date, :status, :priority, :user)
+  end
 end
