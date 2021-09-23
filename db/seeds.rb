@@ -10,3 +10,11 @@
                admin: true
               )
 end
+
+Label.create([
+  { name: 'ラベル1' },
+  { name: 'ラベル2' },
+  { name: 'ラベル3' },
+  { name: 'ラベル4' },
+  { name: 'ラベル5' }
+])

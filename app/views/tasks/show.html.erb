@@ -28,6 +28,13 @@
 </p>
 
 <p>
+  <strong>ラベル:</strong>
+  <% @task.labels.each do |label| %>
+    <%= label.name %>
+  <% end %>
+</p>
+
+<p>
   <strong>作成者：</strong>
   <%= @task.user.name %>
 </p>

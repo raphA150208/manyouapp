@@ -19,9 +19,10 @@
     <tr>
       <th>タスク名</th>
       <th>内容</th>
-      <th><%= link_to '並べ替え（終了期限）', tasks_path(sort_expired: "true") %></th>
+      <th><%= link_to '▽並べ替え（終了期限）', tasks_path(sort_expired: "true") %></th>
       <th>ステータス</th>
-      <th><%= link_to '並べ替え（優先順位）', tasks_path(sort_priority: "true") %></th>
+      <th><%= link_to '▽並べ替え（優先順位）', tasks_path(sort_priority: "true") %></th>
+      <th>ラベル</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -34,6 +35,11 @@
         <td class="task_row"><%= task.due_date %></td>
         <td class="task_row"><%= task.status %></td>
         <td class="task_row"><%= task.priority %></td>
+        <td class="task_row">
+          <% task.labels.each do |task_label| %>
+            <%= task_label.name %>
+          <% end %>
+        </td>
         <td><button type="button" class="btn btn-outline-success"><%= link_to '詳細', task %></button></td>
         <td><button type="button" class="btn btn-outline-info"><%= link_to '編集', edit_task_path(task.id) %></button></td>
         <td><button type="button" class="btn btn-outline-danger"><%= link_to '削除', task, method: :delete, data: { confirm: '本当に削除しますか?' } %></button></td>

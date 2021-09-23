@@ -31,9 +31,17 @@
     <%= form.select :status, Task.statuses.keys.to_a, {} %>
   </div>
   <br>
+
   <div class="field_priority">
     <%= form.label :優先順位 %>
     <%= form.select :priority, Task.priorities.keys.to_a, {} %>
+  </div>
+  <br>
+  <div class="field_label">
+    <% Label.all.each do |label| %>
+      <%= form.check_box :label_ids, { multiple: true, checked: @task.labels.find_by(id: label.id).present?, include_hidden: false }, label[:id] %>
+      <label class='badge badge-secondary'><%= label.name %></label>
+    <% end %>
   </div>
   <br>
   <div class="actions">
