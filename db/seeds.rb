@@ -1,6 +1,6 @@
 User.create!(name: "obito", email: "obito@email.com", password: "rinnegan", password_confirmation: "rinnegan", admin: true)
 
-9.times do |n|name = Faker::JapaneseMedia::Naruto.character
+10.times do |n|name = Faker::JapaneseMedia::Naruto.character
   email = Faker::Internet.email
   password = "password"
   password_confirmation = "password"

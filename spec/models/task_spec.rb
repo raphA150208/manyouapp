@@ -25,28 +25,28 @@ RSpec.describe Task, type: :model do
     end
     describe '検索機能' do
       let!(:general_user) { FactoryBot.create(:general_user) }
-      let!(:task) { FactoryBot.create(:task, title: 'task', due_date: '2021-09-30 00:00:00', status: '未着手', priority: '中', user:general_user) }
+      let!(:task) { FactoryBot.create(:task, title: 'task_test', due_date: '2021-09-30 00:00:00', status: '完了', priority: '中', user:general_user) }
       let!(:second_task) { FactoryBot.create(:second_task, title: 'sample', due_date: '2021-09-30 00:00:00', status: '進行中', priority: '中', user:general_user) }
       context 'scopeメソッドでタイトルのあいまい検索をした場合' do
         it "検索キーワードを含むタスクが絞り込まれる" do
-          expect(Task.search_title('task')).to include(task)
-          expect(Task.search_title('task')).not_to include(second_task)
-          expect(Task.search_title('task').count).to eq 1
+          expect(Task.search_title('task_te')).to include(task)
+          expect(Task.search_title('task_te')).not_to include(second_task)
+          expect(Task.search_title('task_te').count).to eq 1
         end
       end
       context 'scopeメソッドでステータス検索をした場合' do
         it "ステータスに完全一致するタスクが絞り込まれる" do
-          expect(Task.search_status('未着手')).to include(task)
-          expect(Task.search_status('未着手').count).to eq 1
+          expect(Task.search_status('完了')).to include(task)
+          expect(Task.search_status('完了').count).to eq 1
         end
       end
       context 'scopeメソッドでタイトルのあいまい検索とステータス検索をした場合' do
         it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
-          expect(Task.search_title('task')).to include(task)
-          expect(Task.search_title('task')).not_to include(second_task)
-          expect(Task.search_title('task').count).to eq 1
-          expect(Task.search_status('未着手')).to include(task)
-          expect(Task.search_status('未着手').count).to eq 1
+          expect(Task.search_title('task_te')).to include(task)
+          expect(Task.search_title('task_te')).not_to include(second_task)
+          expect(Task.search_title('task_te').count).to eq 1
+          expect(Task.search_status('完了')).to include(task)
+          expect(Task.search_status('完了').count).to eq 1
         end
       end
     end

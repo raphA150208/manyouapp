@@ -6,6 +6,9 @@ FactoryBot.define do
     status {'未着手'}
     priority {'低'}
     association :user, user: :general_user
+    after(:create) do |task|
+      create_list(:labeling, 1, task: task, label: create(:label))
+    end
   end
   factory :second_task, class: Task do
     title { 'test_title2' }
@@ -14,5 +17,8 @@ FactoryBot.define do
     status {'進行中'}
     priority {'低'}
     association :user, user: :general_user
+    after(:create) do |second_task|
+      create_list(:labeling, 1, task: second_task, label: create(:label))
+    end
   end
 end
