@@ -16,6 +16,8 @@ class TasksController < ApplicationController
       @tasks =  current_user.tasks.search_title(params[:search_title]).page(params[:page])
     elsif params[:search_status].present?
       @tasks =  current_user.tasks.search_status(params[:search_status]).page(params[:page])
+    elsif params[:label_id].present?
+      @tasks = Task.joins(:labels).where(labels:{id: params[:label_id]}).page(params[:page])
     end
   end
 
@@ -44,8 +46,8 @@ class TasksController < ApplicationController
     else
       respond_to do |format|
         if @task.save
-          format.html { redirect_to @task, notice: "タスク作成完了" }
-          format.json { render :show, status: :created, location: @task }
+          format.html { redirect_to tasks_path, notice: "タスク作成完了" }
+          format.json { render :index, status: :created, location: @task }
         else
           format.html { render :new, status: :unprocessable_entity }
           format.json { render json: @task.errors, status: :unprocessable_entity }
@@ -89,6 +91,6 @@ class TasksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def task_params
-    params.require(:task).permit(:task, :title, :content, :due_date, :status, :priority, :user)
+    params.require(:task).permit(:task, :title, :content, :due_date, :status, :priority, :user, label_ids:[])
   end
 end

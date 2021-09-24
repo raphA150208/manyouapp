@@ -17,6 +17,13 @@
       <%= form.hidden_field :priority %>
       <p>優先順位:<%= @task.priority %></p>
 
+      <% @task.label_ids.each do |id| %>
+        <%= form.hidden_field :label_ids, multiple: true, value: id %>
+      <% end %>
+      <% @task.labels.each do |label| %>
+        <p>ラベル:<%= label.name %></p>
+      <% end %>
+
       <%= form.submit '作成' %>
       <%= form.submit '戻る', name: 'back' %>
     <% end %>
