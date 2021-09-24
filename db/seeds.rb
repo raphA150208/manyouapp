@@ -23,7 +23,7 @@ end
   Task.create!(
     title: "task#{n + 1}",
     content: "content#{n + 1}",
-    expired_at: "2021-10-22 00:00:00",
+    due_date: "2021-10-22 00:00:00",
     status: "未着手",
     priority: "低",
     user_id: user_id
